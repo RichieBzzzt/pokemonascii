@@ -5,6 +5,6 @@ Function Get-PokemonAsAscii {
         $Pokemon
     )
     $uponelevel = Split-Path (Split-Path $PSCommandPath)
-    Write-Host $uponelevel
-    Get-ChildItem $uponelevel
+    $pkmnAsciiFiles = Join-Path -Path $uponelevel -ChildPath (Join-Path -Path $pokemon -ChildPath ".txt")
+    Test-Path $pkmnAsciiFiles
 }
