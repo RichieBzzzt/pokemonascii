@@ -90,7 +90,6 @@ Function Initialize-PokemonImages {
 Install-Module pokemonascii -Force
 Import-Module pokemonascii
 
-Get-PokemonAsAscii -Pokemon 'Rotom'
+Get-PokemonAsAscii -Pokemon 'Dreepy'
 
-$poke = Get-Content -Path "C:\Users\RichardLee\Documents\PowerShell\Modules\pokemonascii\0.0.12\pkmnasciifiles\rotom.txt"
-$poke
+
