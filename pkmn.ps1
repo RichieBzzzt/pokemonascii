@@ -78,9 +78,6 @@ Function Initialize-PokemonImages {
 
 }
 
-Import-Module ./pokemonascii
-
-Get-PokemonAsAscii -Pokemon 'Pikachu'
 
 # $e = Get-ChildItem ./pkmnasciifiles/*
 # $en = $e.Name
@@ -89,3 +86,6 @@ Get-PokemonAsAscii -Pokemon 'Pikachu'
 
 #   Write-Host "`"/pkmnasciifiles/$n`","
 # }
+
+Install-Module pokemonascii -Force
+Import-Module pokemonascii
