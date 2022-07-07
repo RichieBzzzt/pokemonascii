@@ -5,6 +5,7 @@ Function Get-PokemonAsAscii {
         $Pokemon
     )
     $pokemonPsd1Path = (Get-Module -ListAvailable pokemonascii).path
+    $pokemonPsd1Path
     $PokemonFolderPath = Split-Path $pokemonPsd1Path -Parent
     $PokemonFolderPath
         
