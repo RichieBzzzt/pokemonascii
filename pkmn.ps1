@@ -91,6 +91,4 @@ Function Initialize-PokemonImages {
 # Import-Module pokemonascii
 
 # Get-PokemonAsAscii -Pokemon 'Rotom'
-
-$currentFileLocation = Split-Path $MyInvocation.MyCommand.Path
-$currentFileLocation
+$PSCommandPath
