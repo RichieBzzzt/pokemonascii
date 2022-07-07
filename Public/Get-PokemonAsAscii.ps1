@@ -4,7 +4,7 @@ Function Get-PokemonAsAscii {
     param(
         $Pokemon
     )
-    $uponelevel = Split-Path $PSCommandPath
+    $uponelevel = Split-Path (Split-Path $PSCommandPath)
     Write-Host $uponelevel
-        
+    Get-ChildItem $uponelevel
 }
