@@ -89,3 +89,6 @@ Function Initialize-PokemonImages {
 
 Install-Module pokemonascii -Force
 Import-Module pokemonascii
+
+Get-PokemonAsAscii -Pokemon 'Rotom'
+
