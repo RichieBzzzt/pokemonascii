@@ -87,8 +87,10 @@ Function Initialize-PokemonImages {
 #   Write-Host "`"/pkmnasciifiles/$n`","
 # }
 
-Install-Module pokemonascii -Force
-Import-Module pokemonascii
+# Install-Module pokemonascii -Force
+# Import-Module pokemonascii
 
-Get-PokemonAsAscii -Pokemon 'Rotom'
+# Get-PokemonAsAscii -Pokemon 'Rotom'
 
+$currentFileLocation = Split-Path $MyInvocation.MyCommand.Path
+$currentFileLocation

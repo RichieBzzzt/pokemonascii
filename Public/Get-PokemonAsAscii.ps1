@@ -8,5 +8,8 @@ Function Get-PokemonAsAscii {
     $pokemonPsd1Path
     $PokemonFolderPath = Split-Path $pokemonPsd1Path
     $PokemonFolderPath
+
+    $currentFileLocation = Split-Path $MyInvocation.MyCommand.Path
+$currentFileLocation
         
 }
