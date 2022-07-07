@@ -1,27 +1,3 @@
-Install-Module Asciify
-Import-Module Asciify
-
-Function Initialize-PokemonImages {
-    $base = "https://pokemondb.net"
-    $p = Invoke-WebRequest -Uri $base"/pokedex/national"
-    $plinks = $p.Links
-    $what = $plinks | Where-Object class -eq 'ent-name'
-    $imageLocation = Join-Path -Path $PSScriptRoot -ChildPath 'pkmnartwork'
-    New-Item -Path $imageLocation -ItemType Directory -Force
-
-    ForEach ($w in $what) {
-        $PokemonName = $w.href.Substring(9)
-        $pokemonLink = $base + $w.href
-        $PokedexEntry = Invoke-WebRequest $pokemonLink 
-        $pokemonImage = $PokedexEntry.Images[0]
-        $pkmnLink = $pokemonImage.outerHTML.Substring(10, (($pokemonImage.outerHTML.IndexOf("jpg")) - 7))
-        $pkmnSaveFileName = $pkmnLink.Split("/")
-        $pokemonArtworkFile = Join-Path -Path $imageLocation -ChildPath $pkmnSaveFileName[4]
-        Invoke-WebRequest -Uri $pkmnLink -OutFile $pokemonArtworkFile
-    }
-
-}
-
 
 function Convert-ImageToAsciiArt
 {
@@ -78,22 +54,38 @@ function Convert-ImageToAsciiArt
   $sb.ToString()
 }
 
-Function Invoke-PokemonAsciiArt {
-    [OutputType([string])]
-    [CmdletBinding()]
-    param(
-        $Pokemon
-    )
-    #(Get-Module -ListAvailable PowerShellIse*).path
-    $ChildPath =  "/pkmnartwork/"+$pokemon+".jpg"
-    $path = Join-Path -Path $PSScriptRoot -ChildPath $ChildPath
-    $path
-    $NewChildPath = "/pkmnartwork/"+$pokemon+".txt"
-    $newpath = Join-Path -Path $PSScriptRoot -ChildPath $NewChildPath
-    Convert-ImageToAsciiArt -Path $Path -MaxWidth 400 | Set-Content -Path $newpath -Encoding UTF8
-    Return $newPath
-        
+Function Initialize-PokemonImages {
+    $base = "https://pokemondb.net"
+    $p = Invoke-WebRequest -Uri $base"/pokedex/national"
+    $plinks = $p.Links
+    $what = $plinks | Where-Object class -eq 'ent-name'
+    $imageLocation = Join-Path -Path $PSScriptRoot -ChildPath 'pkmnartwork'
+    #New-Item -Path $imageLocation -ItemType Directory -Force
+
+    ForEach ($w in $what) {
+        $PokemonName = $w.href.Substring(9)
+        $pokemonLink = $base + $w.href
+        $PokedexEntry = Invoke-WebRequest $pokemonLink 
+        $pokemonImage = $PokedexEntry.Images[0]
+        $pkmnLink = $pokemonImage.outerHTML.Substring(10, (($pokemonImage.outerHTML.IndexOf("jpg")) - 7))
+        $pkmnSaveFileName = $pkmnLink.Split("/")
+        $pokemonArtworkFile = Join-Path -Path $imageLocation -ChildPath $pkmnSaveFileName[4]
+        # Invoke-WebRequest -Uri $pkmnLink -OutFile $pokemonArtworkFile
+        $NewChildPath = "/pkmnasciifiles/"+$PokemonName+".txt"
+        $newpath = Join-Path -Path $PSScriptRoot -ChildPath $NewChildPath
+        Convert-ImageToAsciiArt -Path $pokemonArtworkFile -MaxWidth 60 | Set-Content -Path $newpath -Encoding UTF8
+    }
+
 }
 
-#$d = Invoke-PokemonAsciiArt -Pokemon "Bulbasaur"
-$image = [Drawing.Image]::FromFile('/Users/richielee/Documents/pkmnartwork/accelgor.jpg')
+Import-Module ./pokemonascii
+
+Get-PokemonAsAscii -Pokemon 'Pikachu'
+
+# $e = Get-ChildItem ./pkmnasciifiles/*
+# $en = $e.Name
+
+# foreach ($n in $en){
+
+#   Write-Host "`"/pkmnasciifiles/$n`","
+# }
