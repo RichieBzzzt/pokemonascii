@@ -87,8 +87,7 @@ Function Initialize-PokemonImages {
 #   Write-Host "`"/pkmnasciifiles/$n`","
 # }
 
-# Install-Module pokemonascii -Force
-# Import-Module pokemonascii
+Install-Module pokemonascii -Force
+Import-Module pokemonascii
 
-# Get-PokemonAsAscii -Pokemon 'Rotom'
-$PSCommandPath
+Get-PokemonAsAscii -Pokemon 'Rotom'
